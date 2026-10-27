@@ -1,0 +1,23 @@
+[manifest]
+version = "0.1.0"
+priority = 0
+
+# Append the mod to the end of the game's main.lua. By then every game
+# function is defined, so the mod can wrap them.
+# tracker.lua goes first: it defines the ProgressTracker table the others use.
+[[patches]]
+[patches.copy]
+target = "main.lua"
+position = "append"
+sources = ["tracker.lua", "achievements.lua", "progress.lua", "settings.lua"]
+
+# Add the mod's tab to the settings menu, the way Cartomancer adds its own.
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+match_indent = true
+position = "before"
+pattern = '''local t = create_UIBox_generic_options({back_func = 'options',contents = {create_tabs('''
+payload = '''
+if ProgressTracker then tabs[#tabs+1] = ProgressTracker.settings_tab() end
+'''
