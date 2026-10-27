@@ -1,13 +1,13 @@
 -- The "Tracker" tab of the game's settings menu (Options → Settings): linking
--- the game, the code to type on the site, and which profile is sent. Its text
--- follows ProgressTracker.status, which tracker.lua updates every frame.
+-- the game, the code to type or paste on the site, and which profile is sent.
+-- Its text follows ProgressTracker.status, which tracker.lua updates every frame.
 do
   G.FUNCS.progress_tracker_link = function()
     ProgressTracker.press_link()
   end
 
-  G.FUNCS.progress_tracker_track = function()
-    ProgressTracker.track_this_profile()
+  G.FUNCS.progress_tracker_second = function()
+    ProgressTracker.press_second()
   end
 
   local function text_row(field, scale, colour)
@@ -47,7 +47,7 @@ do
           nodes = {
             button("link_button", "progress_tracker_link", G.C.RED),
             { n = G.UIT.C, config = { minw = 0.2 } },
-            button("track_button", "progress_tracker_track", G.C.BLUE),
+            button("second_button", "progress_tracker_second", G.C.BLUE),
           },
         },
       },

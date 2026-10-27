@@ -17,13 +17,13 @@ It doesn't need Steamodded, and works next to [Ankh](https://github.com/MathIsFu
 
 1. Sign in with Twitch at [bot.andy-balatro.com/tracker](https://bot.andy-balatro.com/tracker). That also lets the bot answer in your chat. You can turn it off there.
 2. In the game, open Options → Settings → **Tracker** and press **Link**. A code shows up.
-3. Type the code on the site, or press **Open the page** in the game to get there with the code filled in.
+3. Press **Open the page** in the game to get there with the code filled in, or **Copy code** and paste it on the site.
 
 The game says `Linked to <you>` and starts sending. On the site you can pick what your page and chat command show, change the command, unlink games, or remove everything.
 
 ## What it sends
 
-Only the profile you linked on is sent, so playing on another profile doesn't touch your page. To send a different one, switch to it and press **Track this profile** in the Tracker tab.
+Only the profile you linked on is sent, so playing on another profile doesn't touch your page. To send a different one, switch to it and press **Track this profile** in the Tracker tab (the same button says **Copy code** while a code is showing).
 
 The mod sends the profile's name, each joker's and deck's best stake (or that it's locked or undiscovered), the challenges won, the achievements and the collection count. It checks every 5 seconds and sends only when something changed.
 

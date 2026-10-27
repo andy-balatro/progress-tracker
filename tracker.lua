@@ -110,7 +110,7 @@ do
   -- What the settings tab shows. Its text nodes follow these fields.
   ProgressTracker.status = {
     line = "", code = "", hint = "", profile = "", sent = "",
-    link_button = "Link", track_button = "Track this profile",
+    link_button = "Link", second_button = "Track this profile",
   }
 
   -- Linking ---------------------------------------------------------------------
@@ -154,7 +154,17 @@ do
     if link and link.code then ProgressTracker.open_link_page() else ProgressTracker.start_link() end
   end
 
-  function ProgressTracker.track_this_profile()
+  -- Until when the second button says the code was copied.
+  local copied_until = 0
+
+  -- The second button copies the code while one shows, so it can be pasted on
+  -- the site, and otherwise sends this profile's progress from now on.
+  function ProgressTracker.press_second()
+    if link and link.code then
+      love.system.setClipboardText(link.code)
+      copied_until = love.timer.getTime() + 2
+      return
+    end
     ProgressTracker.config.profile = G.SETTINGS.profile
     ProgressTracker.save_config()
     ProgressTracker.progress_changed()
@@ -221,7 +231,11 @@ do
     local tracked = ProgressTracker.config.profile
     status.profile = tracked and ("Sending progress from: " .. profile_name(tracked)) or ""
     status.link_button = (link and link.code and "Open the page") or (ProgressTracker.is_linked() and "Link again") or "Link"
-    status.track_button = tracked == G.SETTINGS.profile and "Tracking this profile" or "Track this profile"
+    if link and link.code then
+      status.second_button = love.timer.getTime() < copied_until and "Copied!" or "Copy code"
+    else
+      status.second_button = tracked == G.SETTINGS.profile and "Tracking this profile" or "Track this profile"
+    end
   end
 
   local update_ref = Game.update
