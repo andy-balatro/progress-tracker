@@ -3,7 +3,7 @@
 A [Lovely](https://github.com/ethangreen-dev/lovely-injector) mod that sends your Balatro progress to [bot.andy-balatro.com/tracker](https://bot.andy-balatro.com/tracker). That gives you:
 
 - **A public page** at `bot.andy-balatro.com/tracker/<your twitch name>`, updated as you play. It shows every joker's best stake sticker, your decks' stakes, challenges, achievements and the game's overall progress %. You can switch it to **gold stickers only**, for All Gold Stickers runs, which also shows when each gold landed.
-- **A chat command** (`!progress`, or one you pick) that [andy_balatro](https://twitch.tv/andy_balatro)'s bot answers in your Twitch chat, e.g. `Gold stickers 87/150 | Last: Blueprint (12m ago) | <link>`. You don't need Nightbot or another bot.
+- **Chat commands** (`!progress`, or up to 5 you pick, like `!ags`) that [andy_balatro](https://twitch.tv/andy_balatro)'s bot answers in your Twitch chat, e.g. `Gold stickers 87/150 | Last: Blueprint (12m ago) | <link>`. You don't need Nightbot or another bot.
 
 It doesn't need Steamodded, and works next to [Ankh](https://github.com/MathIsFun0/Ankh).
 
@@ -19,7 +19,7 @@ It doesn't need Steamodded, and works next to [Ankh](https://github.com/MathIsFu
 2. In the game, open Options → Settings → **Tracker** and press **Link**. A code shows up.
 3. Press **Open the page** in the game to get there with the code filled in, or **Copy code** and paste it on the site.
 
-The game says `Linked to <you>` and starts sending. On the site you can pick what your page and chat command show, change the command, unlink games, or remove everything.
+The game says `Linked to <you>` and starts sending. On the site you can pick what your page and chat commands show, change the commands, unlink games, or remove everything.
 
 ## What it sends
 
