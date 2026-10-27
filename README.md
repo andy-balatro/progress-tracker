@@ -1,6 +1,6 @@
 # Andy's Progress Tracker
 
-A [Lovely](https://github.com/ethangreen-dev/lovely-injector) mod that sends your Balatro progress to [bot.andy-balatro.com/tracker](https://bot.andy-balatro.com/tracker). That gives you:
+A [Lovely](https://github.com/ethangreen-dev/lovely-injector) mod that sends your Balatro progress to [bot.andy-balatro.com](https://bot.andy-balatro.com). That gives you:
 
 - **A public page** at `bot.andy-balatro.com/tracker/<your twitch name>`, updated as you play. It shows every joker's best stake sticker, your decks' stakes, challenges, achievements and the game's overall progress %. You can switch it to **gold stickers only**, for All Gold Stickers runs, which also shows when each gold landed.
 - **Chat commands** (`!progress`, or up to 5 you pick, like `!ags`) that [andy_balatro](https://twitch.tv/andy_balatro)'s bot answers in your Twitch chat, e.g. `Gold stickers 87/150 | Last: Blueprint (12m ago) | <link>`. You don't need Nightbot or another bot.
@@ -15,11 +15,11 @@ It doesn't need Steamodded, and works next to [Ankh](https://github.com/MathIsFu
 
 ## Link it to your Twitch
 
-1. Sign in with Twitch at [bot.andy-balatro.com/tracker](https://bot.andy-balatro.com/tracker). That also lets the bot answer in your chat. You can turn it off there.
+1. Sign in with Twitch at [bot.andy-balatro.com](https://bot.andy-balatro.com). That also lets the bot answer in your chat. You can turn it off there.
 2. In the game, open Options → Settings → **Tracker** and press **Link**. A code shows up.
 3. Press **Open the page** in the game to get there with the code filled in, or **Copy code** and paste it on the site.
 
-The game says `Linked to <you>` and starts sending. On the site you can pick what your page and chat commands show, change the commands, unlink games, or remove everything.
+The game says `Linked to <you>` and starts sending. On the site you can pick what your page and chat commands show, change the commands, unlink games, or remove everything. The same link works for [Andy's Chat](https://github.com/andy-balatro/andys-chat), which shows your Twitch chat in the game, if you use it too.
 
 ## What it sends
 
@@ -31,8 +31,10 @@ The mod sends the profile's name, each joker's and deck's best stake (or that it
 
 ## Files
 
-`tracker.lua` (settings, linking and the network thread), `achievements.lua`, `progress.lua` (what's sent and when) and `settings.lua` (the Tracker tab). `lovely.toml` appends them to the game's `main.lua` in that order. Each file is wrapped in `do ... end`, so they share only the global `ProgressTracker` table.
+`andys_link.lua` (linking the game and the network thread), `tracker.lua` (which profile is sent), `achievements.lua`, `progress.lua` (what's sent and when) and `settings.lua` (the Tracker tab). `lovely.toml` appends them to the game's `main.lua` in that order. Each file is wrapped in a block, so they share only the global `ProgressTracker` and `AndysLink` tables.
 
-Requests go over HTTPS with the `https` module Balatro ships, on a background thread, so the game never waits on the network. Set the `PROGRESS_TRACKER_URL` environment variable to point the mod at another server (e.g. `http://localhost:3000` while working on the bot). The link and token are saved in `config/progress-tracker.jkr` in the game's save folder. Errors go to `Mods\lovely\log`.
+`andys_link.lua` is the same file Andy's Chat has. With both installed, only the first copy runs, so there's one link. Copy changes to it over to Andy's Chat too.
+
+Requests go over HTTPS with the `https` module Balatro ships, on a background thread, so the game never waits on the network. Set the `ANDYS_MODS_URL` environment variable to point the mod at another server (e.g. `http://localhost:3000` while working on the bot). The link and token are saved in `config/andys-link.jkr` in the game's save folder, and the tracked profile in `config/progress-tracker.jkr`. Errors go to `Mods\lovely\log`.
 
 Don't use it alongside [andy-bot-balatro](https://github.com/andy-balatro/andy-bot-balatro) with its Balatro Crazy format on: both track achievements and would show each popup twice.

@@ -28,7 +28,7 @@ do
     return get_deck_win_stake(center.key)
   end
 
-  -- The fields the server's /api/tracker/game/progress takes, or nil before
+  -- The fields the server's /api/game/progress takes, or nil before
   -- the profile has loaded.
   local function current_progress()
     local profile = G.PROFILES[G.SETTINGS.profile]
@@ -86,7 +86,7 @@ do
     local status = ProgressTracker.status
     if failure then status.sent = failure
     elseif last_sent_at then status.sent = "Last sent " .. ago(now - last_sent_at) end
-    if sending or now < next_check or not ProgressTracker.is_linked() then return end
+    if sending or now < next_check or not AndysLink.is_linked() then return end
     next_check = now + CHECK_SECONDS
     -- Other profiles (a casual one, say) don't touch the page.
     if G.SETTINGS.profile ~= ProgressTracker.config.profile then
@@ -101,14 +101,13 @@ do
     if fingerprint == last_sent then return end
 
     sending = true
-    ProgressTracker.post("/api/tracker/game/progress", progress, ProgressTracker.config.token, function(code, body)
+    AndysLink.post("/api/game/progress", progress, function(code, body)
       sending = false
       failure = nil
       if code == 200 then
         last_sent, last_sent_at = fingerprint, love.timer.getTime()
       elseif code == 401 then
-        ProgressTracker.unlinked()
-        status.line = "Unlinked on the site. Press Link to link again."
+        -- Unlinked on the site; AndysLink drops the link and says so.
         last_sent_at = nil
         status.sent = ""
       elseif code == 429 then

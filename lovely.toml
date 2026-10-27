@@ -4,12 +4,13 @@ priority = 0
 
 # Append the mod to the end of the game's main.lua. By then every game
 # function is defined, so the mod can wrap them.
-# tracker.lua goes first: it defines the ProgressTracker table the others use.
+# andys_link.lua goes first: it links the game, for this mod and Andy's Chat.
+# Then tracker.lua, which defines the ProgressTracker table the others use.
 [[patches]]
 [patches.copy]
 target = "main.lua"
 position = "append"
-sources = ["tracker.lua", "achievements.lua", "progress.lua", "settings.lua"]
+sources = ["andys_link.lua", "tracker.lua", "achievements.lua", "progress.lua", "settings.lua"]
 
 # Add the mod's tab to the settings menu, the way Cartomancer adds its own.
 [[patches]]
